@@ -1,6 +1,6 @@
 # Python Chess GUI with PyTorch ML Engine
 
-This project combines a Python-based chess GUI with a machine learning chess engine. The GUI allows you to play chess against either Stockfish (a traditional chess engine) or our custom PyTorch-based ML chess engine. The project is based on the [Python-Easy-Chess-GUI](https://github.com/fsmosca/Python-Easy-Chess-GUI) project.
+This project combines a Python-based chess GUI with a machine learning chess engine. The GUI allows you to play chess against either Stockfish (a traditional chess engine) or my custom PyTorch-based ML chess engine. The project is based on the [Python-Easy-Chess-GUI](https://github.com/fsmosca/Python-Easy-Chess-GUI) project.
 
 ## Project Overview
 
@@ -17,28 +17,69 @@ The project consists of two main components:
 5. zstandard (for processing PGN files)
 6. tqdm (for progress bars)
 
-## Installation
+## Installation and Running Instructions
 
 1. Clone the repository and navigate to the project directory:
 ```bash
-cd Python-Easy-Chess-GUI
+git clone <repository-url>
+cd PythonChess_2_Assingment_2
 ```
 
 2. Create and activate a virtual environment:
 ```bash
+# Create virtual environment
 python -m venv venv
-source venv/bin/activate  # On Unix/macOS
+
+# Activate on Unix/macOS
+source venv/bin/activate
+
+# Activate on Windows
+# .\venv\Scripts\activate
 ```
 
-3. Install the ML engine dependencies:
+3. Install the dependencies:
 ```bash
+# Install GUI dependencies
+cd Python-Easy-Chess-GUI
+pip install -r requirements.txt
+
+# Install ML engine dependencies
 cd Engines/ML_Chess_Engine
 pip install -r requirements.txt
 ```
 
+4. Running the Chess GUI:
+```bash
+# Make sure you're in the GUI directory
+cd /path/to/PythonChess_2_Assingment_2/Python-Easy-Chess-GUI
+
+# Activate virtual environment if not already activated
+source ../venv/bin/activate  # Unix/macOS
+# .\venv\Scripts\activate    # Windows
+
+# Run the GUI
+python python_easy_chess_gui.py
+```
+
+5. Setting up the ML Engine in GUI:
+   - Click on "Mode" in the menu bar
+   - Select "Play" to enable game mode
+   - Click on "Engine" in the menu bar
+   - Select "Set Engine Opponent"
+   - Choose "ML_Chess_Engine" from the list
+   - The engine is now ready to play
+
+6. Configuring Engine Settings:
+   - Click on "Engine" → "Manage" → "Edit"
+   - Select "ML_Chess_Engine"
+   - Current settings:
+     - Search depth: 7 plies
+     - Move time: 5000ms (5 seconds)
+   - These can be adjusted based on your preference
+
 ## Machine Learning Approach
 
-Our chess engine uses a hybrid approach combining neural network evaluation with traditional chess search techniques:
+The chess engine uses a hybrid approach combining neural network evaluation with traditional chess search techniques:
 
 1. **Neural Network Architecture**:
    - Input: 768-dimensional feature vector (8x8 board × 12 piece types)
@@ -133,32 +174,24 @@ Located in `Engines/ML_Chess_Engine/`:
   - NumPy for numerical operations
   - tqdm for progress tracking
 
-## Using the Engine
+## Troubleshooting
 
-1. The engine is already configured in `pecg_engines.json`
-2. Launch the GUI:
-```bash
-python python_easy_chess_gui.py
-```
-3. Select "ML_Chess_Engine" as your opponent
-4. Configure search depth (1-10) and move time (100-30000ms)
+If you encounter any issues:
 
-## Engine Features
+1. **Engine Not Found**:
+   - Verify the engine path in `pecg_engines.json`
+   - Check that `run_engine.sh` has execute permissions
+   - Ensure virtual environment is activated
 
-1. **Robust Error Handling**:
-   - Fallback to material counting if model fails
-   - Always returns legal moves even under errors
-   - Graceful handling of time constraints
+2. **Model Loading Issues**:
+   - Verify `chess_model.pth` exists in the models directory
+   - Check PyTorch installation matches your system (CPU/GPU)
+   - The engine will fallback to material evaluation if model fails
 
-2. **Performance Optimizations**:
-   - Efficient move ordering
-   - Batch normalization for stable evaluations
-   - Time management to avoid timeouts
-
-3. **UCI Protocol Support**:
-   - Full UCI protocol compliance
-   - Configurable search parameters
-   - Informative logging and error reporting
+3. **Performance Issues**:
+   - Reduce search depth if moves are too slow
+   - Adjust move time in engine settings
+   - Check system resources and CPU usage
 
 ## Credits
 
