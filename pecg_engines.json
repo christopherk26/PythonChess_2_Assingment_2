@@ -1,0 +1,64 @@
+[
+    {
+        "command": "stockfish",
+        "workingDirectory": "/opt/homebrew/Cellar/stockfish/17.1/bin",
+        "name": "stockfish",
+        "protocol": "uci",
+        "options": [
+            {
+                "name": "Threads",
+                "default": 1,
+                "value": 1,
+                "type": "spin",
+                "min": 1,
+                "max": 512
+            },
+            {
+                "name": "Hash",
+                "default": 16,
+                "value": 16,
+                "type": "spin",
+                "min": 1,
+                "max": 33554432
+            },
+            {
+                "name": "Skill Level",
+                "default": 20,
+                "value": 20,
+                "type": "spin",
+                "min": 0,
+                "max": 20
+            },
+            {
+                "name": "UCI_LimitStrength",
+                "default": false,
+                "value": false,
+                "type": "check"
+            },
+            {
+                "name": "UCI_Elo",
+                "default": 1350,
+                "value": 1350,
+                "type": "spin",
+                "min": 1320,
+                "max": 2850
+            }
+        ]
+    },
+    {
+        "command": "python ml_engine.py",
+        "workingDirectory": "Engines/ML_Chess_Engine",
+        "name": "ML_Chess_Engine",
+        "protocol": "uci",
+        "options": [
+            {
+                "name": "Search Depth",
+                "default": 4,
+                "value": 4,
+                "type": "spin",
+                "min": 1,
+                "max": 10
+            }
+        ]
+    }
+] 
